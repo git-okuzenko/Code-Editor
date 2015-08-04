@@ -2,23 +2,25 @@
 	angular.module('codeditorApp')
 		.controller('CodeMirrorCtrl', CodeMirrorCtrl)
 
-		CodeMirrorCtrl.$inject = ['$scope', '$http', 'baseUrl', '$resource'];
+		CodeMirrorCtrl.$inject = ['$scope', '$http', 'baseUrl'];
 
-		function CodeMirrorCtrl($scope, $http, baseUrl, $resource){
+		function CodeMirrorCtrl($scope, $http, baseUrl){
 
 			$scope.selected = 'mbo';
-			
-			$scope.$on('getThemes', function(event, data){
-				$scope.themes = data.message;
-			});
+			$scope.themes = ['3024-day', '3024-night', 'ambiance', 'base16-dark', 'base16-light', 'blackboard', 'cobalt', 'colorforth', 
+							'dracula', 'eclipse', 'elegant', 'erlang-dark', 'icecoder', 'lesser-dark', 'liquibyte', 'material', 'mbo', 'mdn-like', 
+							'midnight', 'monokai', 'neat', 'neo', 'night', 'paraiso-dark', 'paraiso-light', 'pastel-on-dark', 'rubyblue', 'seti', 
+							'the-matrix', 'tomorrow-night-bright', 'tomorrow-night-eighties', 'ttcn', 'twilight', 'vibrant-ink', 'xq-dark', 'xq-light', 
+							'yeti', 'zenburn'
+						];
 
 			$scope.selectTheme = function(){
 				var input = angular.element(document.querySelector('#select'))[0],
 					theme = input.options[input.selectedIndex].textContent;
 					$scope.editor.setOption("theme", theme);
-		  	};
+			};
 
-		  	$scope.runCode = function(){
+			$scope.runCode = function(){
 				var value = $scope.editor.getValue(),
 					runCode = angular.element(document.querySelector('#runCode'));
 					runCode.attr('href', "javascript:" + value);
@@ -32,28 +34,38 @@
 			});
 
 			$scope.saveCode = function(){
-				$scope.saveCodeRequest = $resource(baseUrl + $scope.postId, null, {
-					update: {method: 'PUT'}
+				$http.get(baseUrl + $scope.postId).success(function(data){
+					$http({
+						method: "PUT",
+						url: baseUrl + $scope.postId,
+						data: {
+							"_id": data._id,
+							"_rev": data._rev,
+							"script": $scope.editor.getValue()
+						}
+					});
 				});
+			}
 
-				$scope.saveCodeRequest.update({
-					"_id": $scope.postId,
-					"_rev": $scope.postRev,
-					"script": $scope.editor.getValue()
-				});
-				
-
-				
-
-
-				// $http({
-				// 	method: "PUT",
-				// 	url: baseUrl + $scope.postId,
-				// 	data: {
-				// 		"_id": $scope.postId,
-				// 		"_rev": $scope.postRev,
-				// 		"script": $scope.editor.getValue()
-				// 	}
-				// })
-			}		
+			$scope.checkCode = function() {
+				var success = JSHINT($scope.editor.getValue()),
+					output = '';
+				if (!success){
+					output = "Check format error:\n\n";
+					for (var i in JSHINT.errors){
+						var err = JSHINT.errors[i];
+						if (null != err) {
+							output += err.line + '[' + err.character + ']: ' + err.reason + '\n';
+						}
+						else {
+							output += "Check format unknown error:\n";
+						}
+					}
+					alert(output);
+				}
+				else{
+					$scope.saveCode();
+					return success;
+				}
+			}
 		};

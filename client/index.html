@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="codeditorApp">
-  <head ng-controller="ThemeCtrl">
+  <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,56 +8,31 @@
 	<link rel="stylesheet" href="../components/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="../components/css/codemirror.css" >
 	<link rel="stylesheet" href="../components/css/style.css">
-	<link rel="stylesheet" ng-href="../components/css/themes/{{theme}}.css" ng-repeat-start="theme in themes" ng-repeat-end />
   </head>
   <body>
-  	<header>
-  		<div class="container">
-	  		<div class="row">
-	  			<div class="col-lg-12 text-center">
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 text-center">
 					<h2 class="header-text">FilesEditor</h2>
 				</div>
-	  		</div>
-  		</div>
-  	</header>
-  	<section>
-  		<div class="container">
-	  		<div class="row">
-	  			<div class="col-sm-12 col-md-6 col-lg-3" ng-controller="SidebarCtrl">
-	  				<ng-include src="'app/sidebar/sidebar.html'"></ng-include>
-	  			</div>
-	  			<div class="col-sm-12 col-md-10 col-lg-9" ng-controller="CodeMirrorCtrl">
-	  				<textarea placeholder="Code goes here..." code-mirror='javascript' ></textarea>
-					<div class="row">
-						<div class="col-lg-12">
-							<pre class="enteredCode">// Code runs there</pre>
-						</div>
-						<div class="col-lg-12">
-							<a id="saveCode" class="btn btn-success pull-right" ng-click="saveCode()" >Save Code</a>
-							<a id="runCode" class="btn btn-primary pull-right" ng-click="runCode()" >Run Code</a>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="bs-callout bs-callout-info" id="callout-type-b-i-elems">
-								<p>Press <kbd>ctrl-space</kbd> to activate autocompletion.</p>
-								<span>Press <kbd>ctrl+F</kbd> to activate search.</span>
-								<p class="pull-right"><strong><code>Select a theme:</code></strong>
-									<select ng-model="selected" ng-options="theme for theme in themes track by theme" ng-change="selectTheme()" id="select"></select>
-								</p>
-							</div>
-						</div>
-					</div>
-	  			</div>
-	  		</div>
-  		</div>
-  	</section>
+			</div>
+		</div>
+	</header>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-6 col-lg-3" ng-controller="SideBarCtrl" side-bar></div>
+				<div class="col-sm-12 col-md-10 col-lg-9" ng-controller="CodeMirrorCtrl" code-editor></div>
+			</div>
+		</div>
+	</section>
 	<!-- Libraries -->
 	<script src="../components/libraries/angular.js" type="text/javascript"></script>
-	<script src="../components/libraries/angular-resource.js" type="text/javascript"></script>
 	<script src="../components/libraries/codemirror.js" type="text/javascript"></script>
 	<script src="../components/libraries/ui-codemirror.js" type="text/javascript"></script>
 	<script src="../components/libraries/treeview.js" type="text/javascript"></script>
+	<script src="../components/libraries/jshint.js" type="text/javascript"></script>
 	<!-- Libraries -->
 
 	<!-- CodeMirror functionality -->
@@ -68,9 +43,10 @@
 	<script src="../components/scripts/javascript-syntax.js" type="text/javascript"></script>
 	<!-- support syntax -->
 	<script src="app/app.module.js" type="text/javascript"></script>
-	<script src="app/themes/themes.controller.js" type="text/javascript"></script>
 	<script src="app/sidebar/sideBar.controller.js" type="text/javascript"></script>
-	<script src="app/codemirror/codeMirror.directive.js" type="text/javascript"></script>
+	<script src="app/sidebar/sideBar.directive.js" type="text/javascript"></script>
 	<script src="app/codemirror/codeMirror.controller.js" type="text/javascript"></script>
+	<script src="app/codemirror/codeditor.directive.js" type="text/javascript"></script>
+	<script src="app/codemirror/codeMirror.directive.js" type="text/javascript"></script>
   </body>
 </html>

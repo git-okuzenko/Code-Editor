@@ -1,0 +1,25 @@
+<div class="row">
+	<div class=class="col-lg-12" >
+		<textarea  placeholder="Code goes here..." code-mirror='javascript'></textarea>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<pre class="enteredCode">// Code runs there</pre>
+	</div>
+	<div class="col-lg-12">
+		<a id="saveCode" class="btn btn-success pull-right" ng-click="checkCode()">Save Code</a>
+		<a id="runCode" class="btn btn-primary pull-right" ng-click="runCode()" >Run Code</a>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="bs-callout bs-callout-info" id="callout-type-b-i-elems">
+			<p>Press <kbd>ctrl+space</kbd> to activate autocompletion.</p>
+			<span>Press <kbd>ctrl+F</kbd> to activate search.</span>
+			<p class="pull-right"><strong><code>Select a theme:</code></strong>
+				<select ng-model="selected" ng-options="theme for theme in themes track by theme" ng-change="selectTheme()" id="select"></select>
+			</p>
+		</div>
+	</div>
+</div>

@@ -1,39 +1,37 @@
 
 	angular.module('codeditorApp')
-		.controller('SidebarCtrl', SidebarCtrl)
+		.controller('SideBarCtrl', SideBarCtrl)
 
-		SidebarCtrl.$inject = ['$scope', '$http', '$rootScope', 'baseUrl', '$resource'];
+		SideBarCtrl.$inject = ['$scope', '$http', '$rootScope', 'baseUrl', 'getterService'];
 
-		function SidebarCtrl($scope, $http, $rootScope, baseUrl, $resource){
+		function SideBarCtrl($scope, $http, $rootScope, baseUrl, getterService, filterList){
 
-			$scope.getTreeData = $resource(baseUrl + 'treedata', null);
+			$scope.cities = [];
 
-			$scope.getTreeData.get().$promise.then(function(data){
-				$scope.treeData = data.script;
+			getterService.getTreeData(baseUrl + 'datatree', function(data){
+				$scope.traverse = function(cities){
+					var i, len = cities.length;
+					for(i = 0; i < len; i++){
+						if(cities[i].children.length > 0){
+							$scope.traverse(cities[i].children);
+						}
+						$scope.cities.push(cities[i].name);
+					}
+				}
+				$scope.traverse(data.script);
 			});
-		
-			$scope.getNeedFile = function(event){
-				if(event.target.tagName === 'SPAN'){
-					var url = event.target.innerHTML.toLowerCase().split(' ').join('_');
-					$scope.getCodeRequest = $resource(baseUrl + url, null);
 
-					$scope.getCodeRequest.get().$promise.then(function(data){
+			$scope.getFile = function(event){
+				if(event.target.getAttribute('data-city')){
+					var url = event.target.getAttribute('data-city').toLowerCase().split(' ').join('_');
+
+					getterService.getFile(baseUrl + url, function(data){
 						$rootScope.$broadcast('getCode', {
 							id: data._id,
 							rev: data._rev,
 							script: data.script
 						});
 					});
-
-					// $http.get(baseUrl + url)
-					// 	.success(function(data){
-					// 		console.log(data._id);
-					// 		$rootScope.$broadcast('getCode', {
-					// 			id: data._id,
-					// 			rev: data._rev,
-					// 			script: data.script
-					// 		});
-					// 	})
 				}
 			};
 		};
