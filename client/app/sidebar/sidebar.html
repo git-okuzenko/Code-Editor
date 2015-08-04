@@ -1,0 +1,20 @@
+<aside>
+    <h3>Your files list</h3>
+    <form name="searchForm" novalidate>
+        <div class="form-group">
+            <label class="sr-only" for="search">Search file: </label>
+            <input type="search" name="search" class="form-control" placeholder="Search..." ng-model="query" required/>
+        </div>
+    </form>
+    <div
+      ng-init="treeData"
+      data-angular-treeview="true"
+      data-tree-id="mytree"
+      data-tree-model="treeData"
+      data-node-id="roleId"
+      data-node-label="roleName"
+      data-node-children="children" 
+      ng-click="getNeedFile($event)"
+      >
+    </div>
+</aside>
