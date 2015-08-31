@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="codeditorApp">
+<html lang="en" ng-app="fileEditorApp">
   <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>codeEditor</title>
+	<title>File Editor</title>
 	<link rel="stylesheet" href="../components/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="../components/css/codemirror.css" >
 	<link rel="stylesheet" href="../components/css/style.css">
@@ -14,7 +14,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<h2 class="header-text">FilesEditor</h2>
+					<h2 class="header-text">File Editor</h2>
 				</div>
 			</div>
 		</div>
@@ -22,13 +22,15 @@
 	<section>
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-12 col-md-6 col-lg-3" ng-controller="SideBarCtrl" side-bar></div>
-				<div class="col-sm-12 col-md-10 col-lg-9" ng-controller="CodeMirrorCtrl" code-editor></div>
+				<div class="col-sm-12 col-md-6 col-lg-3" ng-controller="sideBarCtrl" side-bar></div>
+				<div class="col-sm-12 col-md-10 col-lg-9" ng-controller="codeEditorCtrl" code-editor-section></div>
 			</div>
 		</div>
 	</section>
 	<!-- Libraries -->
 	<script src="../components/libraries/angular.js" type="text/javascript"></script>
+	<script src="../components/libraries/angular-mocks.js" type="text/javascript"></script>
+	<script src="../components/libraries/angular-cookies.js" type="text/javascript"></script>
 	<script src="../components/libraries/codemirror.js" type="text/javascript"></script>
 	<script src="../components/libraries/ui-codemirror.js" type="text/javascript"></script>
 	<script src="../components/libraries/treeview.js" type="text/javascript"></script>
@@ -45,8 +47,8 @@
 	<script src="app/app.module.js" type="text/javascript"></script>
 	<script src="app/sidebar/sideBar.controller.js" type="text/javascript"></script>
 	<script src="app/sidebar/sideBar.directive.js" type="text/javascript"></script>
-	<script src="app/codemirror/codeMirror.controller.js" type="text/javascript"></script>
-	<script src="app/codemirror/codeditor.directive.js" type="text/javascript"></script>
-	<script src="app/codemirror/codeMirror.directive.js" type="text/javascript"></script>
+	<script src="app/codeeditor/code-editor.section.controller.js" type="text/javascript"></script>
+	<script src="app/codeeditor/code-editor.directive.js" type="text/javascript"></script>
+	<script src="app/codeeditor/code-editor-section.directive.js" type="text/javascript"></script>
   </body>
 </html>

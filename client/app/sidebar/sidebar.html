@@ -6,9 +6,9 @@
 			<input type="search" name="search" class="form-control" placeholder="Search..." ng-model="search" required/>
 		</div>
 	</form>
-	<nav id="sidebar" ng-click="getFile($event)">
+	<nav id="sidebar">
 		<ul>
-			<li ng-repeat="city in cities | filter:search" ><a href="" title="{{city}}" data-city="{{city}}" >{{city}}</a></li>
+			<li ng-repeat="city in cities | filter:search" ><a href="" title="{{city}}" data-city="{{city}}" ng-click="getFile($event);">{{city}}</a></li>
 		</ul>
 	</nav>
 </aside>

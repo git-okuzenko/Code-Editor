@@ -2,13 +2,14 @@
 	'use strict';
 
 	angular
-		.module('codeditorApp', [
+		.module('fileEditorApp', [
 			'angularTreeview',
-			'ui.codemirror'
+			'ui.codemirror',
+			'ngCookies'
 		])
 		.constant('baseUrl', 'http://localhost:5984/codeditor/')
 		.factory("getterService", function($http){
-			return{
+			return {
 				getTreeData: function(url, callback){
 					$http.get(url)
 						.success(function(data){
@@ -24,5 +25,5 @@
 					)
 				}
 			}
-		})
+		});
 })(angular);

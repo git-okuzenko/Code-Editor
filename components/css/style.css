@@ -7,9 +7,18 @@
 }
 
 #sidebar a{
+  margin: 1px 0px;
   padding: 2px 3px;
   display: block;
-  -webkit-transition: all .2s ease-in-out;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.active{
+	text-align: center;
+	font-weight: bold;
+	background: #2C2C2C;
+	color: white !important;
 }
 
 #sidebar a:hover{

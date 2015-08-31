@@ -1,6 +1,6 @@
 <div class="row">
-	<div class=class="col-lg-12" >
-		<textarea  placeholder="Code goes here..." code-mirror='javascript'></textarea>
+	<div class="col-lg-12">
+		<textarea placeholder="Code goes here..." code-editor='javascript'></textarea>
 	</div>
 </div>
 <div class="row">
@@ -9,7 +9,7 @@
 	</div>
 	<div class="col-lg-12">
 		<a id="saveCode" class="btn btn-success pull-right" ng-click="checkCode()">Save Code</a>
-		<a id="runCode" class="btn btn-primary pull-right" ng-click="runCode()" >Run Code</a>
+		<a id="runCode" class="btn btn-primary pull-right" ng-click="runCode($event)" >Run Code</a>
 	</div>
 </div>
 <div class="row">
